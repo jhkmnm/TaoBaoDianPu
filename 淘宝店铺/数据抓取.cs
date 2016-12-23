@@ -72,7 +72,8 @@ namespace 淘宝店铺
                         旺旺名称 = item.nick,
                         是否在线 = "待检测",
                         等级 = rank[item.shopIcon.iconClass],
-                        销量 = item.totalsold
+                        销量 = item.totalsold,
+                        ShopID = item.uid
                     });
                 }
                 OnSend(new SendResultEventArgs { totalCount = v.mods.pager.data.totalCount, current = searchindex });

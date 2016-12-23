@@ -35,13 +35,34 @@ namespace Service
         public string UserLogin(string username, string password)
         {
             var user = dal.UserLogin(new Model.User { UserName = username, Password = password });
-            return JsonConvert.SerializeObject(user);
+            return user == null ? "" : JsonConvert.SerializeObject(user);
         }
 
         [WebMethod]
         public string AddContact(string shopId, string userName)
         {
             var v = dal.AddContact(new Model.Contact { ContactName = userName, ContactTime = DateTime.Now.ToString(), ShopID = shopId });
+            return JsonConvert.SerializeObject(v);
+        }
+
+        [WebMethod]
+        public string CheckContact(string shopId)
+        {
+            var v = dal.CheckContact(shopId);
+            return JsonConvert.SerializeObject(v);
+        }
+
+        [WebMethod]
+        public string CheckContacts(string[] shopIds)
+        {
+            var v = dal.CheckContact(shopIds);
+            return JsonConvert.SerializeObject(v);
+        }
+
+        [WebMethod]
+        public string GetUserList()
+        {
+            var v = dal.GetUserList();
             return JsonConvert.SerializeObject(v);
         }
     }

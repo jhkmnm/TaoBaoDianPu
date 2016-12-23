@@ -8,6 +8,8 @@ namespace 淘宝店铺
 {
     public class 店铺数据
     {
+        public string ShopID { get; set; }
+
         public string 店铺名称 { get; set; }
 
         public string 等级 { get; set; }

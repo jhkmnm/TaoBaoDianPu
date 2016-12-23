@@ -1,7 +1,7 @@
 ﻿using System;
 using Dos.ORM;
 
-namespace Service.Model
+namespace Model
 {
     /// <summary>
     /// 实体类Contact。(属性说明自动提取数据库字段的描述信息)

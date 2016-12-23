@@ -1,7 +1,7 @@
 ﻿using System;
 using Dos.ORM;
 
-namespace Service.Model
+namespace Model
 {
     /// <summary>
     /// 实体类User。(属性说明自动提取数据库字段的描述信息)
@@ -14,7 +14,7 @@ namespace Service.Model
         private int _ID;
         private string _UserName;
         private string _Password;
-        private object _IsAdmin;
+        private string _IsAdmin;
 
         /// <summary>
         /// 
@@ -59,7 +59,7 @@ namespace Service.Model
         /// 
         /// </summary>
         [Field("IsAdmin")]
-        public object IsAdmin
+        public string IsAdmin
         {
             get { return _IsAdmin; }
             set
