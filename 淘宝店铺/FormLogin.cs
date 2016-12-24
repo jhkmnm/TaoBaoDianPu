@@ -18,6 +18,7 @@ namespace 淘宝店铺
         {
             InitializeComponent();
             Tool.service.Url = System.Configuration.ConfigurationManager.AppSettings["dataSrvUrl"];
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
