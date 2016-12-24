@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace 淘宝店铺
 {
     public partial class FormLogin : Form
     {
-        localhost.WebService service = new localhost.WebService();
-
         public FormLogin()
         {
             InitializeComponent();
+            Tool.service.Url = System.Configuration.ConfigurationManager.AppSettings["dataSrvUrl"];
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -46,14 +46,14 @@ namespace 淘宝店铺
             {
                 JsMd5 m = new JsMd5();
 
-                var result = service.UserLogin(txtUserName.Text, m.md5(txtPassword.Text).ToString());
+                var result = Tool.service.UserLogin(txtUserName.Text, m.md5(txtPassword.Text).ToString());
                 if (string.IsNullOrWhiteSpace(result))
                 {
                     label3.Visible = true;
                 }
                 else
                 {
-                    var user = JsonConvert.DeserializeObject<Model.User>(result);
+                    Model.User user = JsonConvert.DeserializeObject<Model.User>(result);
                     UserInfo.SetUserInfo(user.UserName, user.IsAdmin == "是");
 
                     new FormMain().Show();

@@ -31,4 +31,9 @@ namespace 淘宝店铺
         public static string UserName { get { return _username; } }
         public static bool IsAdmin { get { return _isadmin; } }
     }
+
+    public class Tool
+    {
+        public static localhost.WebService service = new localhost.WebService();
+    }
 }

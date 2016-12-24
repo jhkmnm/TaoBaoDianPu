@@ -46,10 +46,9 @@ namespace Service
         }
 
         [WebMethod]
-        public string CheckContact(string shopId)
+        public bool CheckContact(string shopId)
         {
-            var v = dal.CheckContact(shopId);
-            return JsonConvert.SerializeObject(v);
+            return dal.CheckContact(shopId);            
         }
 
         [WebMethod]

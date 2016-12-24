@@ -7,8 +7,6 @@ namespace 淘宝店铺
 {
     public partial class FormUserList : Form
     {
-        localhost.WebService service = new localhost.WebService();
-
         public FormUserList()
         {
             InitializeComponent();
@@ -35,15 +33,15 @@ namespace 淘宝店铺
             if(login)
             {
                 JsMd5 m = new JsMd5();
-                service.AddUser(txtUserName.Text, m.md5(txtPassword.Text).ToString());
+                Tool.service.AddUser(txtUserName.Text, m.md5(txtPassword.Text).ToString());
+                BindData();
             }
         }
 
         private void BindData()
         {
-            var s = service.GetUserList();
+            var s = Tool.service.GetUserList();
             List<Model.User> datas = JsonConvert.DeserializeObject<List<Model.User>>(s);
-
             userBindingSource.DataSource = datas;
         }
     }

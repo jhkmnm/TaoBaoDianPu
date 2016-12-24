@@ -15,7 +15,6 @@ namespace 淘宝店铺
 {
     public partial class FormMain : Form
     {
-        localhost.WebService service = new localhost.WebService();
         List<店铺数据> datas = new List<店铺数据>();
 
         public FormMain()
@@ -53,6 +52,8 @@ namespace 淘宝店铺
                 店铺数据BindingSource.DataSource = datas.Where(a => string.IsNullOrEmpty(a.联系时间));
             else
                 店铺数据BindingSource.DataSource = datas;
+
+            dataGridView1.Refresh();
         }
 
         private void F_SendResult(object sender, SendResultEventArgs e)
@@ -93,7 +94,7 @@ namespace 淘宝店铺
             if (datas.Count <= 100)
             {
                 shopIds = datas.Select(s => s.ShopID).ToList();
-                var res = service.CheckContacts(shopIds.ToArray());
+                var res = Tool.service.CheckContacts(shopIds.ToArray());
                 var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
 
                 foreach (var d in dic)
@@ -109,7 +110,7 @@ namespace 淘宝店铺
                     shopIds = copy.Take(100).Select(s => s.ShopID).ToList();
                     copy.RemoveRange(0, 100);
 
-                    var res = service.CheckContacts(shopIds.ToArray());
+                    var res = Tool.service.CheckContacts(shopIds.ToArray());
                     var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
 
                     foreach (var d in dic)
@@ -120,6 +121,11 @@ namespace 淘宝店铺
             }
 
             BindData();
+        }        
+
+        private void CheckContact(string shopId)
+        {
+            var res = Tool.service.CheckContact(shopId);
         }
 
         private void chkContact_CheckedChanged(object sender, EventArgs e)
@@ -152,6 +158,8 @@ namespace 淘宝店铺
             {
                 datas[i].是否在线 = v.data[i] == 1 ? "是" : "否";
             }
+
+            BindData();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -171,6 +179,36 @@ namespace 淘宝店铺
             CheckOnLine();
 
             timer1.Enabled = chkLine.Checked;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var ww = 旺旺地址DataGridViewTextBoxColumn.Index;
+            var dp = 店铺地址DataGridViewTextBoxColumn.Index;
+
+            if (e.ColumnIndex == ww || e.ColumnIndex == dp)
+            {
+                var row = dataGridView1.Rows[e.RowIndex];
+
+                if(e.ColumnIndex == ww)
+                {
+                    var shopid = row.Cells[colShopID.Name].Value.ToString();
+                    var str = Tool.service.AddContact(shopid, UserInfo.UserName);
+                    var res = JsonConvert.DeserializeObject<Model.Result>(str);
+                    if (!res.Succeed && res.Message == "已经联系过")
+                    {
+                        if (MessageBox.Show("已经联系过,是否继续联系", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                            return;
+                    }
+                    else
+                    {
+                        datas.Where(a => a.ShopID == shopid).First().联系时间 = DateTime.Now.ToString();
+                        dataGridView1.Refresh();
+                    }
+                }
+                
+                System.Diagnostics.Process.Start(row.Cells[e.ColumnIndex].Value.ToString());
+            }
         }
     }
 }
