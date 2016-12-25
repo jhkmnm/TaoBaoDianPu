@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.店铺数据BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkLine = new System.Windows.Forms.CheckBox();
             this.chkContact = new System.Windows.Forms.CheckBox();
@@ -42,6 +41,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.colShopID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.店铺名称DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.等级DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品数量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,9 +51,10 @@
             this.店铺地址DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
             this.旺旺名称DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.旺旺地址DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.店铺数据BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -69,11 +70,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 17);
+            this.label1.Location = new System.Drawing.Point(18, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
             // 
             // progressBar1
             // 
@@ -86,6 +86,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -109,12 +112,9 @@
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // 店铺数据BindingSource
-            // 
-            this.店铺数据BindingSource.DataSource = typeof(淘宝店铺.店铺数据);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.chkLine);
             this.groupBox1.Controls.Add(this.chkContact);
             this.groupBox1.Location = new System.Drawing.Point(338, 4);
@@ -127,7 +127,7 @@
             // chkLine
             // 
             this.chkLine.AutoSize = true;
-            this.chkLine.Location = new System.Drawing.Point(137, 25);
+            this.chkLine.Location = new System.Drawing.Point(128, 25);
             this.chkLine.Name = "chkLine";
             this.chkLine.Size = new System.Drawing.Size(72, 16);
             this.chkLine.TabIndex = 1;
@@ -148,13 +148,12 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(635, 29);
+            this.label2.Location = new System.Drawing.Point(635, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(329, 12);
+            this.label2.Size = new System.Drawing.Size(222, 42);
             this.label2.TabIndex = 5;
-            this.label2.Text = "【筛选在线】勾选后，每30秒程序获取一次所有店铺在线状态";
+            this.label2.Text = "【筛选在线】勾选后，按指定时间查询在线状态，如果指定的不是数字程序默认30秒";
             // 
             // timer1
             // 
@@ -174,11 +173,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(679, 8);
+            this.button2.Location = new System.Drawing.Point(865, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 23);
+            this.button2.Size = new System.Drawing.Size(101, 41);
             this.button2.TabIndex = 7;
-            this.button2.Text = "开始抓取";
+            this.button2.Text = "用户列表";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -190,12 +189,23 @@
             this.colShopID.ReadOnly = true;
             this.colShopID.Visible = false;
             // 
+            // textBox2
+            // 
+            this.textBox2.ForeColor = System.Drawing.Color.Gray;
+            this.textBox2.Location = new System.Drawing.Point(205, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(80, 21);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Tag = "间隔时间/秒";
+            this.textBox2.Text = "间隔时间/秒";
+            // 
             // 店铺名称DataGridViewTextBoxColumn
             // 
             this.店铺名称DataGridViewTextBoxColumn.DataPropertyName = "店铺名称";
             this.店铺名称DataGridViewTextBoxColumn.HeaderText = "店铺名称";
             this.店铺名称DataGridViewTextBoxColumn.Name = "店铺名称DataGridViewTextBoxColumn";
             this.店铺名称DataGridViewTextBoxColumn.ReadOnly = true;
+            this.店铺名称DataGridViewTextBoxColumn.Width = 120;
             // 
             // 等级DataGridViewTextBoxColumn
             // 
@@ -203,6 +213,7 @@
             this.等级DataGridViewTextBoxColumn.HeaderText = "等级";
             this.等级DataGridViewTextBoxColumn.Name = "等级DataGridViewTextBoxColumn";
             this.等级DataGridViewTextBoxColumn.ReadOnly = true;
+            this.等级DataGridViewTextBoxColumn.Width = 60;
             // 
             // 商品数量DataGridViewTextBoxColumn
             // 
@@ -210,6 +221,7 @@
             this.商品数量DataGridViewTextBoxColumn.HeaderText = "商品数量";
             this.商品数量DataGridViewTextBoxColumn.Name = "商品数量DataGridViewTextBoxColumn";
             this.商品数量DataGridViewTextBoxColumn.ReadOnly = true;
+            this.商品数量DataGridViewTextBoxColumn.Width = 80;
             // 
             // 销量DataGridViewTextBoxColumn
             // 
@@ -217,6 +229,7 @@
             this.销量DataGridViewTextBoxColumn.HeaderText = "销量";
             this.销量DataGridViewTextBoxColumn.Name = "销量DataGridViewTextBoxColumn";
             this.销量DataGridViewTextBoxColumn.ReadOnly = true;
+            this.销量DataGridViewTextBoxColumn.Width = 60;
             // 
             // 是否在线DataGridViewTextBoxColumn
             // 
@@ -224,6 +237,7 @@
             this.是否在线DataGridViewTextBoxColumn.HeaderText = "是否在线";
             this.是否在线DataGridViewTextBoxColumn.Name = "是否在线DataGridViewTextBoxColumn";
             this.是否在线DataGridViewTextBoxColumn.ReadOnly = true;
+            this.是否在线DataGridViewTextBoxColumn.Width = 90;
             // 
             // 联系时间DataGridViewTextBoxColumn
             // 
@@ -231,6 +245,7 @@
             this.联系时间DataGridViewTextBoxColumn.HeaderText = "联系时间";
             this.联系时间DataGridViewTextBoxColumn.Name = "联系时间DataGridViewTextBoxColumn";
             this.联系时间DataGridViewTextBoxColumn.ReadOnly = true;
+            this.联系时间DataGridViewTextBoxColumn.Width = 120;
             // 
             // 店铺地址DataGridViewTextBoxColumn
             // 
@@ -240,6 +255,7 @@
             this.店铺地址DataGridViewTextBoxColumn.ReadOnly = true;
             this.店铺地址DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.店铺地址DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.店铺地址DataGridViewTextBoxColumn.Width = 150;
             // 
             // 旺旺名称DataGridViewTextBoxColumn
             // 
@@ -256,6 +272,11 @@
             this.旺旺地址DataGridViewTextBoxColumn.ReadOnly = true;
             this.旺旺地址DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.旺旺地址DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.旺旺地址DataGridViewTextBoxColumn.Width = 150;
+            // 
+            // 店铺数据BindingSource
+            // 
+            this.店铺数据BindingSource.DataSource = typeof(淘宝店铺.店铺数据);
             // 
             // FormMain
             // 
@@ -273,9 +294,9 @@
             this.Name = "FormMain";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,6 +326,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn 店铺地址DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 旺旺名称DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewLinkColumn 旺旺地址DataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

@@ -13,7 +13,14 @@ namespace 淘宝店铺
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLogin());
+            //Application.Run(new FormLogin());
+
+            FormLogin f = new FormLogin();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                FormMain fm = new FormMain();
+                fm.ShowDialog();
+            }
         }
     }
 
@@ -24,7 +31,7 @@ namespace 淘宝店铺
 
         public static void SetUserInfo(string userName, bool isAdmin)
         {
-            _username = UserName;
+            _username = userName;
             _isadmin = isAdmin;
         }
 
@@ -34,6 +41,6 @@ namespace 淘宝店铺
 
     public class Tool
     {
-        public static localhost.WebService service = new localhost.WebService();
+        public static localhost.Service service = new localhost.Service();
     }
 }

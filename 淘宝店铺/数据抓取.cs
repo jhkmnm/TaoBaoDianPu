@@ -2,9 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace 淘宝店铺
 {
@@ -68,7 +65,7 @@ namespace 淘宝店铺
                     datas.Add(new 店铺数据 {
                         商品数量 = item.procnt,
                         店铺名称 = item.title,
-                        店铺地址 = "https" + item.shopUrl,
+                        店铺地址 = "https:" + item.shopUrl,
                         旺旺名称 = item.nick,
                         是否在线 = "待检测",
                         等级 = rank[item.shopIcon.iconClass],

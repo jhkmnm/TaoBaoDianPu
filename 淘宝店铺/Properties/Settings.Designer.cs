@@ -26,10 +26,10 @@ namespace 淘宝店铺.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49316/WebService.asmx")]
-        public string 淘宝店铺_localhost_WebService {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:26021/Service.asmx")]
+        public string 淘宝店铺_localhost_Service {
             get {
-                return ((string)(this["淘宝店铺_localhost_WebService"]));
+                return ((string)(this["淘宝店铺_localhost_Service"]));
             }
         }
     }

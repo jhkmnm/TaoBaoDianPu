@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Configuration;
 
 namespace 淘宝店铺
 {
@@ -19,6 +11,11 @@ namespace 淘宝店铺
             InitializeComponent();
             Tool.service.Url = System.Configuration.ConfigurationManager.AppSettings["dataSrvUrl"];
             StartPosition = FormStartPosition.CenterScreen;
+
+#if DEBUG
+            txtUserName.Text = "System";
+            txtPassword.Text = "123456";
+#endif
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -28,16 +25,21 @@ namespace 淘宝店铺
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Login();
+        }
+
+        private void Login()
+        {
             bool login = true;
             label3.Visible = lblUserName.Visible = lblPassword.Visible = false;
 
-            if(string.IsNullOrWhiteSpace(txtUserName.Text))
+            if (string.IsNullOrEmpty(txtUserName.Text))
             {
                 lblUserName.Visible = true;
                 login = false;
             }
 
-            if(string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 lblPassword.Visible = true;
                 login = false;
@@ -48,7 +50,7 @@ namespace 淘宝店铺
                 JsMd5 m = new JsMd5();
 
                 var result = Tool.service.UserLogin(txtUserName.Text, m.md5(txtPassword.Text).ToString());
-                if (string.IsNullOrWhiteSpace(result))
+                if (string.IsNullOrEmpty(result))
                 {
                     label3.Visible = true;
                 }
@@ -57,9 +59,17 @@ namespace 淘宝店铺
                     Model.User user = JsonConvert.DeserializeObject<Model.User>(result);
                     UserInfo.SetUserInfo(user.UserName, user.IsAdmin == "是");
 
-                    new FormMain().Show();
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
+            }
+        }
+
+        private void FormLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 13)
+            {
+                Login();
             }
         }
     }

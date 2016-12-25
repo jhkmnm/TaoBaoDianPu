@@ -10,6 +10,7 @@ namespace 淘宝店铺
         public FormUserList()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             BindData();
         }
 
@@ -18,13 +19,13 @@ namespace 淘宝店铺
             bool login = true;
             lblUserName.Visible = lblPassword.Visible = false;
 
-            if (string.IsNullOrWhiteSpace(txtUserName.Text))
+            if (string.IsNullOrEmpty(txtUserName.Text))
             {
                 lblUserName.Visible = true;
                 login = false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 lblPassword.Visible = true;
                 login = false;
@@ -33,8 +34,16 @@ namespace 淘宝店铺
             if(login)
             {
                 JsMd5 m = new JsMd5();
-                Tool.service.AddUser(txtUserName.Text, m.md5(txtPassword.Text).ToString());
-                BindData();
+                var s = Tool.service.AddUser(txtUserName.Text, m.md5(txtPassword.Text).ToString());
+                Model.Result res = JsonConvert.DeserializeObject<Model.Result>(s);
+                if (res.Succeed)
+                {
+                    MessageBox.Show(res.Message);
+                }
+                else
+                {
+                    BindData();
+                }
             }
         }
 

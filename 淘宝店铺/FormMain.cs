@@ -1,12 +1,9 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Threading;
@@ -22,11 +19,17 @@ namespace 淘宝店铺
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized;
+
+            button2.Visible = UserInfo.IsAdmin;
+
+#if DEBUG
+            textBox1.Text = "威舞";
+#endif
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            if (string.IsNullOrEmpty(textBox1.Text) || textBox1.Text == textBox1.Tag.ToString())
             {
                 MessageBox.Show("请先输入关键词");
                 return;
@@ -43,7 +46,7 @@ namespace 淘宝店铺
             数据抓取 f = new 数据抓取(url);
             f.SendResult += F_SendResult;
             datas = f.抓取();
-            CheckContact();
+            this.Invoke(new Action(() => CheckContact()));
         }
 
         private void BindData()
@@ -90,10 +93,14 @@ namespace 淘宝店铺
         private void CheckContact()
         {
             List<string> shopIds = new List<string>();
+            int count = 100;
 
-            if (datas.Count <= 100)
+            List<店铺数据> copy = new List<店铺数据>(datas.ToArray());
+            while (copy.Count > 0)
             {
-                shopIds = datas.Select(s => s.ShopID).ToList();
+                shopIds = copy.Take(count).Select(s => s.ShopID).ToList();
+                copy.RemoveRange(0, copy.Count > count ? count : copy.Count);
+
                 var res = Tool.service.CheckContacts(shopIds.ToArray());
                 var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
 
@@ -102,26 +109,8 @@ namespace 淘宝店铺
                     datas.First(a => a.ShopID == d.Key).联系时间 = d.Value;
                 }
             }
-            else
-            {
-                List<店铺数据> copy = new List<店铺数据>(datas.ToArray());
-                while (copy.Count > 0)
-                {
-                    shopIds = copy.Take(100).Select(s => s.ShopID).ToList();
-                    copy.RemoveRange(0, 100);
-
-                    var res = Tool.service.CheckContacts(shopIds.ToArray());
-                    var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
-
-                    foreach (var d in dic)
-                    {
-                        datas.First(a => a.ShopID == d.Key).联系时间 = d.Value;
-                    }
-                }
-            }
-
             BindData();
-        }        
+        }      
 
         private void CheckContact(string shopId)
         {
@@ -135,9 +124,13 @@ namespace 淘宝店铺
 
         private void chkLine_CheckedChanged(object sender, EventArgs e)
         {
-            if(datas.Count > 0)
+            if(datas.Count > 0 && chkLine.Checked)
             {
                 CheckOnLine();
+                int interval = 0;
+                if (!int.TryParse(textBox2.Text, out interval))
+                    interval = 30;
+                timer1.Interval = interval * 1000;
                 timer1.Enabled = true;
             }
         }
@@ -147,24 +140,32 @@ namespace 淘宝店铺
         /// </summary>
         private void CheckOnLine()
         {
+            List<店铺数据> copy = new List<店铺数据>(datas.ToArray());
+            int count = 10;
             var url = "http://amos.alicdn.com/muliuserstatus.aw?beginnum=0&site=cntaobao&charset=utf-8&uids={0}&callback=jsonp";
             HtmlWeb web = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
-            var names = string.Join(";", datas.Select(s => s.旺旺名称).ToArray());
-            document = web.Load(string.Format(url, names));
-            var json = document.DocumentNode.InnerText.Replace("jsonp(", "").Replace(")", "");
-            var v = JsonConvert.DeserializeObject<JsonData>(json);
-            for (int i = 0; i < datas.Count; i++)
+            int index = 0;
+            while (copy.Count > 0)
             {
-                datas[i].是否在线 = v.data[i] == 1 ? "是" : "否";
-            }
+                var names = string.Join(";", copy.Take(count).Select(s => s.旺旺名称).ToArray());
+                copy.RemoveRange(0, copy.Count > count ? count : copy.Count);
 
+                document = web.Load(string.Format(url, names));
+
+                var json = document.DocumentNode.InnerText.Replace("jsonp(", "").Replace(")", "");
+                var v = JsonConvert.DeserializeObject<JsonData>(json);
+                for (int i = 0; i < v.data.Length; i++)
+                {
+                    datas[index++].是否在线 = v.data[i] == 1 ? "是" : "否";
+                }
+            }
             BindData();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            CheckOnLine();
+            new FormUserList().ShowDialog();
         }
 
         public class JsonData
@@ -175,6 +176,10 @@ namespace 淘宝店铺
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int interval = 0;
+            if (!int.TryParse(textBox2.Text, out interval))
+                interval = 30;
+            timer1.Interval = interval * 1000;
             timer1.Enabled = false;
             CheckOnLine();
 
@@ -183,6 +188,9 @@ namespace 淘宝店铺
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
+
             var ww = 旺旺地址DataGridViewTextBoxColumn.Index;
             var dp = 店铺地址DataGridViewTextBoxColumn.Index;
 
