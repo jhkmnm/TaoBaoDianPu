@@ -185,6 +185,7 @@ namespace 淘宝店铺
         public int current { get; set; }
         public int totalCount { get; set; }
         public bool isok = false;
+        public 店铺数据 data { get; set; }
 
         public override string ToString()
         {

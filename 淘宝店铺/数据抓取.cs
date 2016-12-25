@@ -47,9 +47,9 @@ namespace 淘宝店铺
          返回符合条件的数据集
          */
 
-        public List<店铺数据> 抓取()
+        public void 抓取()
         {
-            List<店铺数据> datas = new List<店铺数据>();
+            //List<店铺数据> datas = new List<店铺数据>();
             HtmlWeb web = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
             document = web.Load(this.url + this.page);
@@ -58,11 +58,16 @@ namespace 淘宝店铺
 
             var v = JsonConvert.DeserializeObject<网站数据Json>(str);
 
+            if (v.mods.pager.data == null)
+                return;
+
             //销量<4 并且是淘宝店铺
             v.mods.shoplist.data.shopItems.ForEach(item => {
-                if(item.totalsold < 4 && !item.isTmall)
+                店铺数据 d = null;
+                if (item.totalsold < 4 && !item.isTmall)
                 {
-                    datas.Add(new 店铺数据 {
+                    d = new 店铺数据
+                    {
                         商品数量 = item.procnt,
                         店铺名称 = item.title,
                         店铺地址 = "https:" + item.shopUrl,
@@ -71,20 +76,21 @@ namespace 淘宝店铺
                         等级 = rank[item.shopIcon.iconClass],
                         销量 = item.totalsold,
                         ShopID = item.uid
-                    });
+                    };
+                    //datas.Add(d);
                 }
-                OnSend(new SendResultEventArgs { totalCount = v.mods.pager.data.totalCount, current = searchindex });
+                OnSend(new SendResultEventArgs { totalCount = v.mods.pager.data.totalCount, current = searchindex, data = d });
                 searchindex++;
             });
 
-            if(v.mods.pager.data.currentPage < v.mods.pager.data.totalPage)
+            Console.WriteLine(v.mods.pager.data.currentPage);
+            if(v.mods.pager.data.currentPage < v.mods.pager.data.totalPage && v.mods.pager.data.currentPage <= 100)
             {
                 this.page = "&s=" + (v.mods.pager.data.pageSize * v.mods.pager.data.currentPage);
-                var d = 抓取();
-                datas.AddRange(d.ToArray());
+                抓取();
             }
 
-            return datas;
+            //return datas;
         }
 
         protected virtual void OnSend(SendResultEventArgs e)

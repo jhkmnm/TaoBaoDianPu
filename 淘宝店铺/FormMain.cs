@@ -34,6 +34,13 @@ namespace 淘宝店铺
                 MessageBox.Show("请先输入关键词");
                 return;
             }
+            if(datas.Count > 0)
+            {
+                if (MessageBox.Show("现在抓取将覆盖当前的数据，不可恢复，是否继续", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                    return;
+            }
+            datas.Clear();
+            dataGridView1.Rows.Clear();
 
             button1.Enabled = false;
             Thread t = new Thread(T);
@@ -45,8 +52,13 @@ namespace 淘宝店铺
             string url = string.Format("https://shopsearch.taobao.com/search?app=shopsearch&q={0}", System.Web.HttpUtility.UrlEncode(textBox1.Text));
             数据抓取 f = new 数据抓取(url);
             f.SendResult += F_SendResult;
-            datas = f.抓取();
-            this.Invoke(new Action(() => CheckContact()));
+            f.抓取();            
+            this.Invoke(new Action(() => {
+                button1.Enabled = true;
+                label1.Text = "抓取完成";
+                progressBar1.Value = progressBar1.Maximum;
+                CheckContact();
+            }));
         }
 
         private void BindData()
@@ -56,6 +68,7 @@ namespace 淘宝店铺
             else
                 店铺数据BindingSource.DataSource = datas;
 
+            dataGridView1.DataSource = datas;
             dataGridView1.Refresh();
         }
 
@@ -66,6 +79,21 @@ namespace 淘宝店铺
                 progressBar1.Maximum = e.totalCount;
                 progressBar1.Value = e.current;
                 button1.Enabled = e.isok;
+                if (e.data != null)
+                {
+                    datas.Add(e.data);
+                    var i = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[i].Cells[col商品数量.Name].Value = e.data.商品数量.ToString();
+                    dataGridView1.Rows[i].Cells[colShopID.Name].Value = e.data.ShopID;
+                    dataGridView1.Rows[i].Cells[col店铺名称.Name].Value = e.data.店铺名称;
+                    dataGridView1.Rows[i].Cells[col店铺地址.Name].Value = e.data.店铺地址;
+                    dataGridView1.Rows[i].Cells[col旺旺名称.Name].Value = e.data.旺旺名称;
+                    dataGridView1.Rows[i].Cells[col旺旺地址.Name].Value = e.data.旺旺地址;
+                    dataGridView1.Rows[i].Cells[col是否在线.Name].Value = e.data.是否在线;
+                    dataGridView1.Rows[i].Cells[col等级.Name].Value = e.data.等级;
+                    dataGridView1.Rows[i].Cells[col联系时间.Name].Value = e.data.联系时间;
+                    dataGridView1.Rows[i].Cells[col销量.Name].Value = e.data.销量.ToString();
+                }
             }));
         }
 
@@ -110,6 +138,7 @@ namespace 淘宝店铺
                 }
             }
             BindData();
+            //dataGridView1.Refresh();
         }      
 
         private void CheckContact(string shopId)
@@ -191,8 +220,8 @@ namespace 淘宝店铺
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
                 return;
 
-            var ww = 旺旺地址DataGridViewTextBoxColumn.Index;
-            var dp = 店铺地址DataGridViewTextBoxColumn.Index;
+            var ww = col旺旺地址.Index;
+            var dp = col店铺地址.Index;
 
             if (e.ColumnIndex == ww || e.ColumnIndex == dp)
             {

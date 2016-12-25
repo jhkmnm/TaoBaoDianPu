@@ -33,7 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.店铺数据BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.chkLine = new System.Windows.Forms.CheckBox();
             this.chkContact = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,20 +43,18 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.colShopID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.店铺名称DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.等级DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品数量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.销量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.是否在线DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.联系时间DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店铺地址DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.旺旺名称DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.旺旺地址DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.店铺数据BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.col店铺名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col等级 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col商品数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col销量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col是否在线 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col联系时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col店铺地址 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col旺旺名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col旺旺地址 = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -89,20 +89,18 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colShopID,
-            this.店铺名称DataGridViewTextBoxColumn,
-            this.等级DataGridViewTextBoxColumn,
-            this.商品数量DataGridViewTextBoxColumn,
-            this.销量DataGridViewTextBoxColumn,
-            this.是否在线DataGridViewTextBoxColumn,
-            this.联系时间DataGridViewTextBoxColumn,
-            this.店铺地址DataGridViewTextBoxColumn,
-            this.旺旺名称DataGridViewTextBoxColumn,
-            this.旺旺地址DataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.店铺数据BindingSource;
+            this.col店铺名称,
+            this.col等级,
+            this.col商品数量,
+            this.col销量,
+            this.col是否在线,
+            this.col联系时间,
+            this.col店铺地址,
+            this.col旺旺名称,
+            this.col旺旺地址});
             this.dataGridView1.Location = new System.Drawing.Point(4, 65);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -111,6 +109,10 @@
             this.dataGridView1.Size = new System.Drawing.Size(969, 625);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // 店铺数据BindingSource
+            // 
+            this.店铺数据BindingSource.DataSource = typeof(淘宝店铺.店铺数据);
             // 
             // groupBox1
             // 
@@ -123,6 +125,16 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "根据查询结果筛选";
+            // 
+            // textBox2
+            // 
+            this.textBox2.ForeColor = System.Drawing.Color.Gray;
+            this.textBox2.Location = new System.Drawing.Point(205, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(80, 21);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Tag = "间隔时间/秒";
+            this.textBox2.Text = "间隔时间/秒";
             // 
             // chkLine
             // 
@@ -189,94 +201,75 @@
             this.colShopID.ReadOnly = true;
             this.colShopID.Visible = false;
             // 
-            // textBox2
+            // col店铺名称
             // 
-            this.textBox2.ForeColor = System.Drawing.Color.Gray;
-            this.textBox2.Location = new System.Drawing.Point(205, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(80, 21);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Tag = "间隔时间/秒";
-            this.textBox2.Text = "间隔时间/秒";
+            this.col店铺名称.DataPropertyName = "店铺名称";
+            this.col店铺名称.HeaderText = "店铺名称";
+            this.col店铺名称.Name = "col店铺名称";
+            this.col店铺名称.ReadOnly = true;
             // 
-            // 店铺名称DataGridViewTextBoxColumn
+            // col等级
             // 
-            this.店铺名称DataGridViewTextBoxColumn.DataPropertyName = "店铺名称";
-            this.店铺名称DataGridViewTextBoxColumn.HeaderText = "店铺名称";
-            this.店铺名称DataGridViewTextBoxColumn.Name = "店铺名称DataGridViewTextBoxColumn";
-            this.店铺名称DataGridViewTextBoxColumn.ReadOnly = true;
-            this.店铺名称DataGridViewTextBoxColumn.Width = 120;
+            this.col等级.DataPropertyName = "等级";
+            this.col等级.HeaderText = "等级";
+            this.col等级.Name = "col等级";
+            this.col等级.ReadOnly = true;
+            this.col等级.Width = 60;
             // 
-            // 等级DataGridViewTextBoxColumn
+            // col商品数量
             // 
-            this.等级DataGridViewTextBoxColumn.DataPropertyName = "等级";
-            this.等级DataGridViewTextBoxColumn.HeaderText = "等级";
-            this.等级DataGridViewTextBoxColumn.Name = "等级DataGridViewTextBoxColumn";
-            this.等级DataGridViewTextBoxColumn.ReadOnly = true;
-            this.等级DataGridViewTextBoxColumn.Width = 60;
+            this.col商品数量.DataPropertyName = "商品数量";
+            this.col商品数量.HeaderText = "商品数量";
+            this.col商品数量.Name = "col商品数量";
+            this.col商品数量.ReadOnly = true;
+            this.col商品数量.Width = 80;
             // 
-            // 商品数量DataGridViewTextBoxColumn
+            // col销量
             // 
-            this.商品数量DataGridViewTextBoxColumn.DataPropertyName = "商品数量";
-            this.商品数量DataGridViewTextBoxColumn.HeaderText = "商品数量";
-            this.商品数量DataGridViewTextBoxColumn.Name = "商品数量DataGridViewTextBoxColumn";
-            this.商品数量DataGridViewTextBoxColumn.ReadOnly = true;
-            this.商品数量DataGridViewTextBoxColumn.Width = 80;
+            this.col销量.DataPropertyName = "销量";
+            this.col销量.HeaderText = "销量";
+            this.col销量.Name = "col销量";
+            this.col销量.ReadOnly = true;
+            this.col销量.Width = 60;
             // 
-            // 销量DataGridViewTextBoxColumn
+            // col是否在线
             // 
-            this.销量DataGridViewTextBoxColumn.DataPropertyName = "销量";
-            this.销量DataGridViewTextBoxColumn.HeaderText = "销量";
-            this.销量DataGridViewTextBoxColumn.Name = "销量DataGridViewTextBoxColumn";
-            this.销量DataGridViewTextBoxColumn.ReadOnly = true;
-            this.销量DataGridViewTextBoxColumn.Width = 60;
+            this.col是否在线.DataPropertyName = "是否在线";
+            this.col是否在线.HeaderText = "是否在线";
+            this.col是否在线.Name = "col是否在线";
+            this.col是否在线.ReadOnly = true;
             // 
-            // 是否在线DataGridViewTextBoxColumn
+            // col联系时间
             // 
-            this.是否在线DataGridViewTextBoxColumn.DataPropertyName = "是否在线";
-            this.是否在线DataGridViewTextBoxColumn.HeaderText = "是否在线";
-            this.是否在线DataGridViewTextBoxColumn.Name = "是否在线DataGridViewTextBoxColumn";
-            this.是否在线DataGridViewTextBoxColumn.ReadOnly = true;
-            this.是否在线DataGridViewTextBoxColumn.Width = 90;
+            this.col联系时间.DataPropertyName = "联系时间";
+            this.col联系时间.HeaderText = "联系时间";
+            this.col联系时间.Name = "col联系时间";
+            this.col联系时间.ReadOnly = true;
             // 
-            // 联系时间DataGridViewTextBoxColumn
+            // col店铺地址
             // 
-            this.联系时间DataGridViewTextBoxColumn.DataPropertyName = "联系时间";
-            this.联系时间DataGridViewTextBoxColumn.HeaderText = "联系时间";
-            this.联系时间DataGridViewTextBoxColumn.Name = "联系时间DataGridViewTextBoxColumn";
-            this.联系时间DataGridViewTextBoxColumn.ReadOnly = true;
-            this.联系时间DataGridViewTextBoxColumn.Width = 120;
+            this.col店铺地址.DataPropertyName = "店铺地址";
+            this.col店铺地址.HeaderText = "店铺地址";
+            this.col店铺地址.Name = "col店铺地址";
+            this.col店铺地址.ReadOnly = true;
+            this.col店铺地址.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col店铺地址.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // 店铺地址DataGridViewTextBoxColumn
+            // col旺旺名称
             // 
-            this.店铺地址DataGridViewTextBoxColumn.DataPropertyName = "店铺地址";
-            this.店铺地址DataGridViewTextBoxColumn.HeaderText = "店铺地址";
-            this.店铺地址DataGridViewTextBoxColumn.Name = "店铺地址DataGridViewTextBoxColumn";
-            this.店铺地址DataGridViewTextBoxColumn.ReadOnly = true;
-            this.店铺地址DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.店铺地址DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.店铺地址DataGridViewTextBoxColumn.Width = 150;
+            this.col旺旺名称.DataPropertyName = "旺旺名称";
+            this.col旺旺名称.HeaderText = "旺旺名称";
+            this.col旺旺名称.Name = "col旺旺名称";
+            this.col旺旺名称.ReadOnly = true;
             // 
-            // 旺旺名称DataGridViewTextBoxColumn
+            // col旺旺地址
             // 
-            this.旺旺名称DataGridViewTextBoxColumn.DataPropertyName = "旺旺名称";
-            this.旺旺名称DataGridViewTextBoxColumn.HeaderText = "旺旺名称";
-            this.旺旺名称DataGridViewTextBoxColumn.Name = "旺旺名称DataGridViewTextBoxColumn";
-            this.旺旺名称DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 旺旺地址DataGridViewTextBoxColumn
-            // 
-            this.旺旺地址DataGridViewTextBoxColumn.DataPropertyName = "旺旺地址";
-            this.旺旺地址DataGridViewTextBoxColumn.HeaderText = "旺旺地址";
-            this.旺旺地址DataGridViewTextBoxColumn.Name = "旺旺地址DataGridViewTextBoxColumn";
-            this.旺旺地址DataGridViewTextBoxColumn.ReadOnly = true;
-            this.旺旺地址DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.旺旺地址DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.旺旺地址DataGridViewTextBoxColumn.Width = 150;
-            // 
-            // 店铺数据BindingSource
-            // 
-            this.店铺数据BindingSource.DataSource = typeof(淘宝店铺.店铺数据);
+            this.col旺旺地址.DataPropertyName = "旺旺地址";
+            this.col旺旺地址.HeaderText = "旺旺地址";
+            this.col旺旺地址.Name = "col旺旺地址";
+            this.col旺旺地址.ReadOnly = true;
+            this.col旺旺地址.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col旺旺地址.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // FormMain
             // 
@@ -294,9 +287,9 @@
             this.Name = "FormMain";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,17 +309,17 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colShopID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店铺名称DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 等级DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 商品数量DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 销量DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 是否在线DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 联系时间DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewLinkColumn 店铺地址DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 旺旺名称DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewLinkColumn 旺旺地址DataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colShopID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col店铺名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col等级;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col商品数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col销量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col是否在线;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col联系时间;
+        private System.Windows.Forms.DataGridViewLinkColumn col店铺地址;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col旺旺名称;
+        private System.Windows.Forms.DataGridViewLinkColumn col旺旺地址;
     }
 }
 
