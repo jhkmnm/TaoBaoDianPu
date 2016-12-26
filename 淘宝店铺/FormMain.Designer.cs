@@ -33,15 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.店铺数据BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.chkLine = new System.Windows.Forms.CheckBox();
-            this.chkContact = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.colShopID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col店铺名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col等级 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,8 +43,15 @@
             this.col店铺地址 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col旺旺名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col旺旺地址 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.chkLine = new System.Windows.Forms.CheckBox();
+            this.chkContact = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,89 +107,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(969, 625);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // 店铺数据BindingSource
-            // 
-            this.店铺数据BindingSource.DataSource = typeof(淘宝店铺.店铺数据);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.chkLine);
-            this.groupBox1.Controls.Add(this.chkContact);
-            this.groupBox1.Location = new System.Drawing.Point(338, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(291, 55);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "根据查询结果筛选";
-            // 
-            // textBox2
-            // 
-            this.textBox2.ForeColor = System.Drawing.Color.Gray;
-            this.textBox2.Location = new System.Drawing.Point(205, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(80, 21);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Tag = "间隔时间/秒";
-            this.textBox2.Text = "间隔时间/秒";
-            // 
-            // chkLine
-            // 
-            this.chkLine.AutoSize = true;
-            this.chkLine.Location = new System.Drawing.Point(128, 25);
-            this.chkLine.Name = "chkLine";
-            this.chkLine.Size = new System.Drawing.Size(72, 16);
-            this.chkLine.TabIndex = 1;
-            this.chkLine.Text = "筛选在线";
-            this.chkLine.UseVisualStyleBackColor = true;
-            this.chkLine.CheckedChanged += new System.EventHandler(this.chkLine_CheckedChanged);
-            // 
-            // chkContact
-            // 
-            this.chkContact.AutoSize = true;
-            this.chkContact.Location = new System.Drawing.Point(15, 25);
-            this.chkContact.Name = "chkContact";
-            this.chkContact.Size = new System.Drawing.Size(84, 16);
-            this.chkContact.TabIndex = 0;
-            this.chkContact.Text = "筛选未联系";
-            this.chkContact.UseVisualStyleBackColor = true;
-            this.chkContact.CheckedChanged += new System.EventHandler(this.chkContact_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(635, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 42);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "【筛选在线】勾选后，按指定时间查询在线状态，如果指定的不是数字程序默认30秒";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // textBox1
-            // 
-            this.textBox1.ForeColor = System.Drawing.Color.Gray;
-            this.textBox1.Location = new System.Drawing.Point(170, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(162, 21);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Tag = "请输入关键字";
-            this.textBox1.Text = "请输入关键字";
-            this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(865, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 41);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "用户列表";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // colShopID
             // 
@@ -271,6 +186,87 @@
             this.col旺旺地址.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.col旺旺地址.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.chkLine);
+            this.groupBox1.Controls.Add(this.chkContact);
+            this.groupBox1.Location = new System.Drawing.Point(338, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(291, 55);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "根据查询结果筛选";
+            // 
+            // textBox2
+            // 
+            this.textBox2.ForeColor = System.Drawing.Color.Gray;
+            this.textBox2.Location = new System.Drawing.Point(205, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(80, 21);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Tag = "间隔时间/秒";
+            this.textBox2.Text = "间隔时间/秒";
+            this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
+            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
+            // 
+            // chkLine
+            // 
+            this.chkLine.AutoSize = true;
+            this.chkLine.Location = new System.Drawing.Point(128, 25);
+            this.chkLine.Name = "chkLine";
+            this.chkLine.Size = new System.Drawing.Size(72, 16);
+            this.chkLine.TabIndex = 1;
+            this.chkLine.Text = "筛选在线";
+            this.chkLine.UseVisualStyleBackColor = true;
+            this.chkLine.CheckedChanged += new System.EventHandler(this.chkLine_CheckedChanged);
+            // 
+            // chkContact
+            // 
+            this.chkContact.AutoSize = true;
+            this.chkContact.Location = new System.Drawing.Point(15, 25);
+            this.chkContact.Name = "chkContact";
+            this.chkContact.Size = new System.Drawing.Size(84, 16);
+            this.chkContact.TabIndex = 0;
+            this.chkContact.Text = "筛选未联系";
+            this.chkContact.UseVisualStyleBackColor = true;
+            this.chkContact.CheckedChanged += new System.EventHandler(this.chkContact_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(635, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(222, 42);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "【筛选在线】勾选后，按指定时间查询在线状态，如果指定的不是数字程序默认30秒";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // textBox1
+            // 
+            this.textBox1.ForeColor = System.Drawing.Color.Gray;
+            this.textBox1.Location = new System.Drawing.Point(170, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(162, 21);
+            this.textBox1.TabIndex = 6;
+            this.textBox1.Tag = "请输入关键字";
+            this.textBox1.Text = "请输入关键字";
+            this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(865, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(101, 41);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "用户列表";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -287,7 +283,6 @@
             this.Name = "FormMain";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.店铺数据BindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -301,7 +296,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource 店铺数据BindingSource;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkLine;
         private System.Windows.Forms.CheckBox chkContact;

@@ -64,7 +64,7 @@ namespace 淘宝店铺
             //销量<4 并且是淘宝店铺
             v.mods.shoplist.data.shopItems.ForEach(item => {
                 店铺数据 d = null;
-                if (item.totalsold < 4 && !item.isTmall)
+                if (item.totalsold < 4 && !item.isTmall && item.shopIcon.iconClass == "rank seller-rank-0")
                 {
                     d = new 店铺数据
                     {
@@ -75,7 +75,8 @@ namespace 淘宝店铺
                         是否在线 = "待检测",
                         等级 = rank[item.shopIcon.iconClass],
                         销量 = item.totalsold,
-                        ShopID = item.uid
+                        ShopID = item.uid,
+                        联系时间 = ""
                     };
                     //datas.Add(d);
                 }

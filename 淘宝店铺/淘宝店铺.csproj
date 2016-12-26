@@ -115,7 +115,6 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Model.User.datasource" />
-    <None Include="Properties\DataSources\店铺数据.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
